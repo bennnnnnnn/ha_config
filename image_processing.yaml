@@ -1,0 +1,7 @@
+- platform: tensorflow
+  scan_interval: 300
+  source:
+    - entity_id: camera.ipcam_willem
+    - entity_id: camera.ipcam_mathijs
+  model:
+    graph: /config/tensorflow/frozen_inference_graph.pb

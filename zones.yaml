@@ -1,0 +1,17 @@
+- name: Home
+  latitude: !secret latitude
+  longitude: !secret longitude
+  radius: 350
+  icon: mdi:home
+
+- name: Work-Ben
+  latitude: !secret latitude_work_ben
+  longitude: !secret longitude_work_ben
+  radius: 500
+  icon: mdi:worker
+
+- name: Work-Bie
+  latitude: !secret latitude_work_bie
+  longitude: !secret longitude_work_bie
+  radius: 600
+  icon: mdi:worker

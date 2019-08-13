@@ -1,0 +1,7 @@
+- name: away_sleeping
+  entities:
+    group.turn_off_when_away: off
+- name: at_home
+  entities:
+    group.turn_on_when_home: on
+

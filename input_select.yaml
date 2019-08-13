@@ -1,0 +1,15 @@
+thermostat_status:
+  name: "Status thermostaat"
+  options:
+   - 'auto'
+   - 'on'
+   - 'night'
+   - 'summer'
+   - 'off'
+
+tv_amp_source:
+  name: "Versterker bron"
+  options:
+   - '--Uit--'
+   - 'TV'
+   - 'Muziek'

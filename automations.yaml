@@ -1,0 +1,558 @@
+- id: everyone_gone
+  alias: Everyone gone
+  trigger:
+    platform: state
+    entity_id: group.people_group
+    from: home
+    to: not_home
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+  action:
+  - service: media_player.turn_off
+    data:
+      entity_id: media_player.kodislaapkamer
+  - delay: 0:15
+  - service: scene.turn_on
+    data:
+      entity_id: scene.away_sleeping
+  - service: notify.all
+    data:
+      message: Iedereen is weg! Ik zet alle prises uit.
+      title: Homecheck
+- id: someone_home
+  alias: Someone home
+  trigger:
+    platform: state
+    entity_id: group.people_group
+    to: home
+  condition:
+    condition: or
+    conditions:
+    - condition: state
+      entity_id: input_boolean.bie_sleeping
+      state: 'off'
+    - condition: state
+      entity_id: input_boolean.ben_sleeping
+      state: 'off'
+  action:
+  - service: scene.turn_on
+    entity_id: scene.at_home
+- id: someone_home_living_lights
+  alias: Turn on living lights
+  trigger:
+    platform: state
+    entity_id: group.people_group
+    to: home
+  condition:
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: input_boolean.bie_sleeping
+      state: 'off'
+    - condition: state
+      entity_id: input_boolean.ben_sleeping
+      state: 'off'
+  - condition: sun
+    after: sunset
+    after_offset: -00:15:00
+  action:
+  - service: light.turn_on
+    entity_id: light.living_lampen
+- id: ben_sleeping
+  alias: Ben sleeping
+  trigger:
+    platform: state
+    entity_id: input_boolean.ben_sleeping
+    to: 'on'
+  condition:
+    condition: or
+    conditions:
+    - condition: state
+      entity_id: input_boolean.bie_sleeping
+      state: 'on'
+    - condition: state
+      entity_id: device_tracker.gsm_bie
+      state: not_home
+  action:
+  - service: media_player.turn_off
+    data:
+      entity_id: media_player.kodislaapkamer
+  - delay: 0:15
+  - service: scene.turn_on
+    data:
+      entity_id: scene.away_sleeping
+- id: bie_sleeping
+  alias: Bie sleeping
+  trigger:
+    platform: state
+    entity_id: input_boolean.bie_sleeping
+    to: 'on'
+  condition:
+    condition: or
+    conditions:
+    - condition: state
+      entity_id: input_boolean.ben_sleeping
+      state: 'on'
+    - condition: state
+      entity_id: device_tracker.gsm_ben
+      state: not_home
+  action:
+  - service: media_player.turn_off
+    data:
+      entity_id: media_player.kodislaapkamer
+  - delay: 0:15
+  - service: scene.turn_on
+    data:
+      entity_id: scene.away_sleeping
+- id: ben_awake
+  alias: Ben awake
+  trigger:
+    platform: state
+    entity_id: input_boolean.ben_sleeping
+    to: 'off'
+  condition:
+    condition: state
+    entity_id: device_tracker.gsm_ben
+    state: home
+  action:
+  - service: scene.turn_on
+    entity_id: scene.at_home
+- id: bie_awake
+  alias: Bie awake
+  trigger:
+    platform: state
+    entity_id: input_boolean.bie_sleeping
+    to: 'off'
+  condition:
+    condition: state
+    entity_id: device_tracker.gsm_bie
+    state: home
+  action:
+  - service: scene.turn_on
+    entity_id: scene.at_home
+- id: switch_on_tv_amp_tv_on
+  alias: Switch on tv amp when TV is on
+  trigger:
+    platform: state
+    entity_id: binary_sensor.tv_downstairs
+    to: 'on'
+  action:
+    service: input_select.select_option
+    data_template:
+      entity_id: input_select.tv_amp_source
+      option: TV
+- id: switch_off_tv_amp_tv_off
+  alias: Switch off tv amp when TV is off
+  trigger:
+    platform: state
+    entity_id: binary_sensor.tv_downstairs
+    to: 'off'
+  action:
+    service: input_select.select_option
+    data_template:
+      entity_id: input_select.tv_amp_source
+      option: --Uit--
+- id: switch_off_kodi_bedroom
+  alias: Switch off kodi-slaapkamer when it is powered down
+  trigger:
+    platform: state
+    entity_id: media_player.kodislaapkamer
+    to: 'off'
+    for:
+      seconds: 10
+  action:
+  - service: switch.turn_off
+    entity_id: switch.bedroom_tv_switch
+- id: controll_hall_lights
+  alias: Control hall lights
+  trigger:
+  - platform: state
+    entity_id: switch.switch_gang_beneden_19
+  - platform: state
+    entity_id: switch.switch_gang_boven_21
+  action:
+    service: input_boolean.toggle
+    entity_id: input_boolean.gang_switch_state
+- id: lichten_gang_uit
+  alias: Lichten gang uit
+  trigger:
+    platform: state
+    entity_id: input_boolean.gang_switch_state
+    to: 'off'
+  action:
+    service: homeassistant.turn_off
+    entity_id: light.gang_lampen
+- id: lichten_gang_aan
+  alias: Lichten gang aan
+  trigger:
+    platform: state
+    entity_id: input_boolean.gang_switch_state
+    to: 'on'
+  action:
+    service: homeassistant.turn_on
+    entity_id: light.gang_lampen
+- id: turn_on_amp_on_media_start
+  alias: Turn on amp on media start
+  trigger:
+    platform: state
+    entity_id: media_player.osmcliving
+    to: playing
+  action:
+    service: input_select.select_option
+    data_template:
+      entity_id: input_select.tv_amp_source
+      option: TV
+- id: remote_1_A_grote_lamp_living
+  alias: Toggle grote lamp living on pressing A on remote 1
+  trigger:
+    platform: mqtt
+    topic: home/OpenMQTTGateway-TV/433toMQTT/13361634
+  action:
+    service: light.toggle
+    entity_id: light.grote_lamp_living_2
+- id: remote_1_c_kleine_lamp_living
+  alias: Toggle kleine lamp living on pressing c on remote 1
+  trigger:
+    platform: mqtt
+    topic: home/OpenMQTTGateway-TV/433toMQTT/13361633
+  action:
+    service: light.toggle
+    entity_id: light.kleine_lamp_living_2
+- id: remote_1_B_grote_lamp_living
+  alias: Toggle grote lamp living on pressing B on remote 1
+  trigger:
+    platform: mqtt
+    topic: home/OpenMQTTGateway-TV/433toMQTT/13361640
+  action:
+  - service: light.toggle
+    entity_id: light.grote_lamp_living_2
+- id: remote_1_d_kleine_lamp_living
+  alias: Toggle kleine lamp living on pressing d on remote 1
+  trigger:
+    platform: mqtt
+    topic: home/OpenMQTTGateway-TV/433toMQTT/13361636
+  action:
+  - service: light.toggle
+    entity_id: light.kleine_lamp_living_2
+- id: turn_off_living_light_sunrise
+  alias: Turn off living light sunrise
+  trigger:
+    platform: sun
+    event: sunrise
+    offset: -00:10:00
+  action:
+    service: light.turn_off
+    entity_id: light.living_lampen
+- id: turn_on_living_light_sunset
+  alias: Turn on living light sunset
+  trigger:
+    platform: sun
+    event: sunset
+    offset: -00:15:00
+  condition:
+    condition: state
+    entity_id: group.people_group
+    state: home
+  action:
+    service: light.turn_on
+    entity_id: light.living_lampen
+- id: remote_2_A_wereldbol
+  alias: Toggle wereldbol on pressing A on remote 2
+  trigger:
+    platform: mqtt
+    topic: home/OpenMQTTGateway-TV/433toMQTT/139987
+  action:
+  - service: light.toggle
+    entity_id: light.lamp_kamer_mathijs_24
+- id: remote_2_c_wereldbol
+  alias: Toggle wereldbol on pressing c on remote 2
+  trigger:
+    platform: mqtt
+    topic: home/OpenMQTTGateway-TV/433toMQTT/8959201
+  action:
+  - service: light.toggle
+    entity_id: light.lamp_kamer_mathijs_24
+- id: remote_2_B_wereldbol
+  alias: Toggle wereldbol on pressing B on remote 2
+  trigger:
+    platform: mqtt
+    topic: home/OpenMQTTGateway-TV/433toMQTT/8959208
+  action:
+  - service: light.toggle
+    entity_id: light.lamp_kamer_mathijs_24
+- id: remote_2_d_wereldbol
+  alias: Toggle wereldbol on pressing d on remote 2
+  trigger:
+    platform: mqtt
+    topic: home/OpenMQTTGateway-TV/433toMQTT/8959202
+  action:
+  - service: light.toggle
+    entity_id: light.lamp_kamer_mathijs_24
+- id: sonoff_sync
+  alias: Power state on HA start-up
+  trigger:
+    platform: homeassistant
+    event: start
+  action:
+  - service: mqtt.publish
+    data:
+      topic: cmnd/sonoffs/state
+      payload: ''
+  - service: mqtt.publish
+    data:
+      topic: cmnd/sonoffs/POWER
+  - service: mqtt.publish
+    data:
+      topic: cmnd/sonoffs/POWER2
+  - service: mqtt.publish
+    data:
+      topic: cmnd/sonoffs/POWER3
+- id: iftt_webhooks
+  alias: IFTT integration
+  trigger:
+    platform: event
+    event_type: ifttt_webhook_received
+    event_data:
+      action: call_service
+  action:
+    service_template: '{{ trigger.event.data.service }}'
+    data_template:
+      entity_id: '{{ trigger.event.data.entity_id }}'
+
+- id: sonoff_mqtt_discovery
+  alias: Enable MQTT discovery for all devices
+  trigger:
+    platform: homeassistant
+    event: start
+  action:
+  - service: mqtt.publish
+    data:
+      topic: cmnd/sonoffs/SetOption19
+      payload: '1'
+- id: utility_meter_tariff_automation
+  alias: Automation for utility meter tariff selection
+  trigger:
+  - platform: time
+    at: 06:00:00
+  - platform: time
+    at: '21:00:00'
+  condition:
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+  action:
+  - service: utility_meter.next_tariff
+    entity_id: utility_meter.elektriciteitsverbruik_dag
+  - service: utility_meter.next_tariff
+    entity_id: utility_meter.elektriciteitsverbruik_maand
+- id: utility_meter_tariff_set_offpeak_default_at_startup
+  alias: Set offpeak as default at HA startup
+  trigger:
+    platform: homeassistant
+    event: start
+  action:
+  - service: utility_meter.select_tariff
+    data:
+      entity_id: utility_meter.elektriciteitsverbruik_dag
+      tariff: offpeak
+  - service: utility_meter.select_tariff
+    data:
+      entity_id: utility_meter.elektriciteitsverbruik_maand
+      tariff: offpeak
+- id: utility_meter_tariff_set_at_startup
+  alias: Set proper tariff at startup of Home Assistant
+  trigger:
+    platform: homeassistant
+    event: start
+  condition:
+  - condition: time
+    after: 06:00:00
+    before: '21:00:00'
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+  action:
+  - service: utility_meter.select_tariff
+    data:
+      entity_id: utility_meter.elektriciteitsverbruik_dag
+      tariff: peak
+  - service: utility_meter.select_tariff
+    data:
+      entity_id: utility_meter.elektriciteitsverbruik_maand
+      tariff: peak
+- id: warn_for_low_battery_ben
+  alias: Warn for low cellphone battery Ben
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.gsm_ben_battery_sensor
+    below: 15
+  condition:
+    condition: template
+    value_template: '{{ states.sensor.gsm_ben_battery_sensor.attributes[''power'']
+      == ''Unplugged'' }}'
+  action:
+    service: tts.google_translate_say
+    entity_id: media_player.woonkamer
+    data:
+      message: De batterij van Bens GSM is bijna leeg, je laad hem best op!
+      language: nl
+- id: warn_for_low_battery_bie
+  alias: Warn for low cellphone battery Bie
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.gsm_bie_battery_sensor
+    below: 15
+  condition:
+    condition: template
+    value_template: '{{ states.sensor.gsm_bie_battery_sensor.attributes[''power'']
+      == ''Unplugged'' }}'
+  action:
+    service: tts.google_translate_say
+    entity_id: media_player.woonkamer
+    data:
+      message: De batterij van Bie haar GSM is bijna leeg, je laad hem best op!
+      language: nl
+- id: mathijs_is_cool
+  alias: Mathijs is cool
+  trigger:
+    platform: time
+    at: 07:45:00
+  action:
+    service: tts.google_translate_say
+    entity_id: media_player.woonkamer
+    data:
+      message: Mathijs is kei cool!
+      language: nl
+- id: willem_is_cool
+  alias: Willem is cool
+  trigger:
+    platform: time
+    at: 07:46:00
+  action:
+    service: tts.google_translate_say
+    entity_id: media_player.woonkamer
+    data:
+      message: Willem is kei cool!
+      language: nl
+- id: slaaptijd
+  alias: Tijd om te gaan slapen jongens
+  trigger:
+    platform: time
+    at: '19:30:00'
+  action:
+    service: tts.google_translate_say
+    entity_id: media_player.woonkamer
+    data:
+      message: Tijd om te gaan slapen jongens!
+      language: nl
+- id: slaaptijd_song
+  alias: Goodnight song
+  trigger:
+  - at: '19:30:10'
+    platform: time
+  action:
+  - service: media_player.play_media
+    data:
+      entity_id: "media_player.woonkamer"
+      media_content_id: !secret goodnight_song
+      media_content_type: "music"
+- id: turn_on_amp_on_squeezeplayer_start
+  alias: Turn on amp on squeezeplayer start
+  trigger:
+    platform: state
+    entity_id: media_player.living
+    to: playing
+  action:
+    service: input_select.select_option
+    data_template:
+      entity_id: input_select.tv_amp_source
+      option: Muziek
+- id: tv_amp_muziek
+  alias: Switch tv amp to DVD
+  trigger:
+    platform: state
+    entity_id: input_select.tv_amp_source
+    to: Muziek
+  action:
+  - service: script.tv_amp_sacd
+- id: tv_amp_tv
+  alias: Switch tv amp to TV
+  trigger:
+    platform: state
+    entity_id: input_select.tv_amp_source
+    to: TV
+  action:
+  - service: script.tv_amp_video2
+- id: tv_amp_poweroff
+  alias: Switch tv amp off
+  trigger:
+    platform: state
+    entity_id: input_select.tv_amp_source
+    to: --Uit--
+  condition:
+    condition: and
+    conditions:
+    - condition: template
+      value_template: '{{ not is_state(''media_player.osmcliving'',''playing'') }}'
+    - condition: template
+      value_template: '{{ not is_state(''media_player.squeeze_living'',''playing'')}}'
+  action:
+  - service: script.tv_amp_poweroff
+  
+- id: smoke_detector_living
+  alias: Rookdetectie living
+  trigger:
+   - platform: mqtt
+     topic: "home/OpenMQTTGateway-TV/433toMQTT/12290571"
+  action:
+    service: script.smoke_alarm_action
+    data:
+      smoke_name: 'living'
+      
+- id: smoke_detector_1e_verdiep
+  alias: Rookdetectie 1e verdiep
+  trigger:
+   - platform: mqtt
+     topic: "home/OpenMQTTGateway-TV/433toMQTT/7817739"
+  action:
+    service: script.smoke_alarm_action
+    data:
+      smoke_name: '1e verdiep'
+
+- id: smoke_detector_2e_verdiep
+  alias: Rookdetectie 2e verdiep
+  trigger:
+   - platform: mqtt
+     topic: "home/OpenMQTTGateway-TV/433toMQTT/16566795"
+  action:
+    service: script.smoke_alarm_action
+    data:
+      smoke_name: '2e verdiep'
+
+- id: smoke_detector_gang
+  alias: Rookdetectie gang gelijkvloers
+  trigger:
+   - platform: mqtt
+     topic: "home/OpenMQTTGateway-TV/433toMQTT/7981579"
+  action:
+    service: script.smoke_alarm_action
+    data:
+      smoke_name: 'gelijkvloers'
+
+- id: deurbel
+  alias: Deurbel
+  trigger:
+   - platform: mqtt
+     topic: home/OpenMQTTGateway-TV/433toMQTT/42128
+  action:
+    service: script.doorbell_action
+

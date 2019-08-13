@@ -1,0 +1,31 @@
+turn_off_when_away:
+  name: Uitzetten bij weggaan
+  entities:
+   - input_boolean.gang_switch_state
+#   - switch.bedroom_tv_switch
+   - switch.switch_living_tvdevs_14
+   - light.living_lampen
+   - light.zolder_lampen
+   - light.gang_lampen
+   - light.maantje_zolder_13
+   - light.lamp_eetplaats_25
+   - light.led_strip_keuken_26
+   - light.licht_terras_30
+   - light.lichten_keuken_29
+
+turn_on_when_home:
+  name: Aanzetten bij thuiskomen
+  entities:
+   - switch.switch_living_tvdevs_14
+
+people_group:
+  name: People
+  entities:
+   - device_tracker.gsm_ben
+   - device_tracker.gsm_bie
+
+switches_gang:
+  name: Switchen gang
+  entities:
+   - switch.switch_gang_beneden_19
+   - switch.switch_gang_boven_21

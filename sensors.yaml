@@ -1,0 +1,235 @@
+- platform: yr
+
+#- platform: mqtt
+#  state_topic: 'stat/sonoff_keuken/STATUS10'
+#  value_template: '{{ value_json.StatusSNS.AM2301.Temperature }}'
+#  name: Bathroom temperature
+#  friendly_name: Temperatuur badkamer
+#  unit_of_measurement: "°C"
+
+#- platform: mqtt
+#  state_topic: 'stat/sonoff_keuken/STATUS10'
+#  value_template: '{{ value_json.StatusSNS.AM2301.Humidity }}'
+#  name: Bathroom humidity
+#  friendly_name: Vochtigheid badkamer
+#  unit_of_measurement: "%"
+#  icon: mdi:water-percent
+
+- platform: nut
+  name: 'UPS Kelder'
+  host: !secret nas_ip
+  username: !secret upsmon_username
+  password: !secret upsmon_password
+  resources:
+   - battery.charge
+   - input.voltage
+   - ups.load
+   - battery.runtime
+
+- platform: sabnzbd
+  name: SABznbd downloader
+  host: !secret sabnzbd_ip
+  api_key: !secret sabnzbd_api_key
+  monitored_variables:
+   - current_status
+   - speed
+   - queue_size
+   - queue_remaining
+   - disk_size
+   - disk_free
+   - month_size
+
+- platform: mqtt
+  state_topic: 'ebusd/bai/Status01'
+  name: "Burner status"
+  value_template: "{{ value.split(';')[-1] }}"
+
+- platform: mqtt
+  state_topic: 'ebusd/bai/Status01'
+  name: "Temperature heating flow"
+  value_template: "{{ value.split(';')[0] }}"
+  unit_of_measurement: "°C"
+
+- platform: mqtt
+  state_topic: 'ebusd/bai/Status01'
+  name: "Temperature heating return"
+  value_template: "{{ value.split(';')[1] }}"
+  unit_of_measurement: "°C"
+
+- platform: mqtt
+  state_topic: 'ebusd/bai/Status01'
+  name: "Hot water temperature"
+  value_template: "{{ value.split(';')[2] }}"
+  unit_of_measurement: "°C"
+
+- platform: mqtt
+  state_topic: 'ebusd/bai/Status01'
+  name: "Hot water tank "
+  value_template: "{{ value.split(';')[3] }}"
+  unit_of_measurement: "°C"
+
+- platform: mqtt
+  state_topic: 'sonoff_sensor_living/tele/SENSOR'
+  name: "Living humidity"
+  value_template: "{{ value_json.SonoffSC.Humidity }}"
+  unit_of_measurement: "%"
+  icon: mdi:water-percent
+
+- platform: mqtt
+  state_topic: 'sonoff_sensor_living/tele/SENSOR'
+  name: "Living noise"
+  value_template: "{{ value_json.SonoffSC.Noise }}"
+  unit_of_measurement: "%"
+  icon: mdi:speaker-wireless
+
+- platform: mqtt
+  state_topic: 'sonoff_sensor_living/tele/SENSOR'
+  name: "Living air quality"
+  value_template: "{{ value_json.SonoffSC.AirQuality }}"
+  unit_of_measurement: "%"
+  icon: mdi:rotate-3d
+
+- platform: mqtt
+  state_topic: 'sonoff_sensor_living/tele/SENSOR'
+  name: "Living light amount"
+  value_template: "{{ value_json.SonoffSC.Light }}"
+  unit_of_measurement: "%"
+  icon: mdi:lightbulb-on-outline
+
+- platform: mqtt
+  state_topic: 'sonoff_sensor_living/tele/SENSOR'
+  name: "Living Temperature"
+  value_template: "{{ value_json.SonoffSC.Temperature|float + 2.5 }}"
+  unit_of_measurement: "°C"
+  icon: mdi:thermometer-lines
+
+- platform: template
+  sensors:
+    hot_water_running:
+      friendly_name: "Hot water running"
+      entity_id: sensor.burner_status
+      value_template: >-
+        {% if is_state('sensor.burner_status', 'overrun') %}
+          on
+        {% else %}
+          off
+        {% endif %}
+      icon_template: >-
+        {% if is_state('sensor.burner_status', 'overrun') %}
+          mdi:water
+        {% else %}
+          mdi:water-off
+        {% endif %}
+    burner:
+      friendly_name: "Burner"
+      entity_id: sensor.burner_status
+      value_template: >-
+        {% if is_state('sensor.burner_status', 'off') %}
+          off
+        {% else %}
+          on
+        {% endif %}
+      icon_template: >-
+        {% if is_state('sensor.burner_status', 'off') %}
+          mdi:radiobox-blank
+        {% else %}
+          mdi:fire
+        {% endif %}
+
+#- platform: tcp
+#  name: Livingroom Temperature 
+#  host: ebusd
+#  port: 8888
+#  timeout: 5
+#  payload: "r RoomTemp\n"
+#  value_template: "{{ value.split(';')[0] }}"
+#  unit_of_measurement: "°C"
+
+#- platform: tcp
+#  name: Desired Temperature 
+#  host: ebusd
+#  port: 8888
+#  timeout: 5
+#  payload: "r DisplayedHc1RoomTempDesired\n"
+#  unit_of_measurement: "°C"
+
+#- platform: tcp
+#  name: Heating Water Pressure 
+#  host: ebusd
+#  port: 8888
+#  timeout: 5
+#  payload: "r WaterPressure\n"
+#  value_template: "{{ value.split(';')[0] }}"
+#  unit_of_measurement: "bar"
+
+#- platform: tcp
+#  name: Thermostat status
+#  host: ebusd
+#  port: 8888
+#  timeout: 5
+#  payload: "r -f Hc1OPMode\n"
+
+- platform: buienradar
+  monitored_conditions:
+   - symbol
+   - humidity
+   - temperature
+   - windspeed
+   - pressure
+   - groundtemperature
+   - precipitation
+   - rainchance_1d
+   - sunchance_1d
+
+- platform: rest
+  resource: !secret garbage_collect_url
+  name: garbage-collect
+  value_template: '{{ value_json.markdown_text }}'
+
+- platform: template
+  sensors:
+    electricity_usage: 
+      friendly_name: Elektriciteitsverbruik
+      unit_of_measurement: kwh
+      value_template: >
+        {{ state_attr('sensor.energiemeter_22', 'current_energy_kwh') }}
+    electricity_price_day:
+      friendly_name: Prijs elektriciteit vandaag
+      unit_of_measurement: €
+      entity_id: 
+       - sensor.elektriciteitsverbruik_dag_peak
+       - sensor.elektriciteitsverbruik_dag_offpeak  
+      value_template: >
+        {{ ((states('sensor.elektriciteitsverbruik_dag_peak')|float * states('input_number.prijs_kwh_peak')|float) + (states('sensor.elektriciteitsverbruik_dag_offpeak')|float * states('input_number.prijs_kwh_offpeak')|float)) | round(2) }}
+    electricity_price_month:
+      friendly_name: Prijs elektriciteit deze maand
+      unit_of_measurement: €
+      entity_id: 
+       - sensor.elektriciteitsverbruik_maand_peak
+       - sensor.elektriciteitsverbruik_maand_offpeak                
+      value_template: >
+        {{ ((states('sensor.elektriciteitsverbruik_maand_peak')|float * states('input_number.prijs_kwh_peak')|float) + (states('sensor.elektriciteitsverbruik_maand_offpeak')|float * states('input_number.prijs_kwh_offpeak')|float)) | round(2) }}
+    current_electricity_tariff:
+      friendly_name: Dag of nachttarrief
+      entity_id:
+       - utility_meter.elektriciteitsverbruik_dag
+      value_template: >-
+        {% if is_state('utility_meter.elektriciteitsverbruik_dag', 'offpeak') %}
+          Nachttarief
+        {% else %}
+          Dagtarief
+        {% endif %}
+
+- platform: template
+  sensors:
+    gsm_ben_battery_sensor:
+      friendly_name: "Batterij GSM Ben"
+      unit_of_measurement: '%'
+      value_template: "{{ state_attr('device_tracker.gsm_ben', 'battery_level') }}"
+
+- platform: template
+  sensors:
+    gsm_bie_battery_sensor:
+      friendly_name: "Batterij GSM Bie"
+      unit_of_measurement: '%'
+      value_template: "{{ state_attr('device_tracker.gsm_bie', 'battery_level') }}"

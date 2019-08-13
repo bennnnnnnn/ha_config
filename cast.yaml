@@ -1,0 +1,2 @@
+media_player:
+ - host: !secret google_home_living_ip #google-home-mini-livingroom

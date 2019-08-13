@@ -1,0 +1,272 @@
+title: Huisje Bie Ben Mathijs en Willem
+resources:
+  - url: /local/plugins/markdown-mod.js
+    type: module
+views:
+  - title: Beneden
+    id: downstairs
+    cards:
+      - type: entities
+        title: Living
+        id: downstairs_living
+        entities:
+         - switch.switch_living_tvdevs_14
+         - binary_sensor.tv_downstairs
+         - light.grote_lamp_living_2
+         - light.kleine_lamp_living_2
+         - sensor.living_temperature
+         - sensor.living_air_quality
+         - sensor.living_humidity
+         - sensor.living_light_amount
+         - sensor.living_noise
+      - type: light
+        entity: light.living_lampen
+      - type: media-control
+        entity: media_player.osmcliving
+      - type: media-control
+        entity: media_player.living
+      - type: media-control
+        entity: media_player.woonkamer
+      - type: vertical-stack
+        title: TV Versterker
+        id: tv_amp
+        cards:
+         - type: horizontal-stack
+           cards:
+            - type: entities
+              entities:
+               - input_select.tv_amp_source
+            - type: entity-button
+              icon: mdi:volume-plus
+              entity: script.tv_amp_volume_up_5
+              tap_action:
+                action: call-service
+                service: script.turn_on
+                service_data:
+                  entity_id: script.tv_amp_volume_up_5
+            - type: entity-button
+              icon: mdi:volume-minus
+              entity: script.tv_amp_volume_down_5
+              tap_action:
+                action: call-service
+                service: script.turn_on
+                service_data:
+                  entity_id: script.tv_amp_volume_down_5
+
+         - type: horizontal-stack
+           cards:
+            - type: entity-button
+              entity: script.tv_amp_mute
+              tap_action:
+                action: call-service
+                service: script.turn_on
+                service_data:
+                  entity_id: script.tv_amp_mute
+              icon: mdi:volume-off
+            - type: entity-button
+              icon: mdi:volume-plus
+              entity: script.tv_amp_volume_up_1
+              tap_action:
+                action: call-service
+                service: script.turn_on
+                service_data:
+                  entity_id: script.tv_amp_volume_up_1
+
+            - type: entity-button
+              icon: mdi:volume-minus
+              entity: script.tv_amp_volume_down_1
+              tap_action:
+                action: call-service
+                service: script.turn_on
+                service_data:
+                  entity_id: script.tv_amp_volume_down_1
+
+      - type: entities
+        show_header_toggle: false
+        title: GSMs
+        id: cellphones
+        entities:
+         - sensor.gsm_ben_battery_sensor
+         - sensor.gsm_bie_battery_sensor
+      - type: vertical-stack
+        title: Keuken
+        id: downstairs_keuken
+        cards:
+          - type: entities
+            title: Keuken
+            entities:
+             - light.lichten_keuken_29
+             - light.led_strip_keuken_26
+             - light.lamp_eetplaats_25           
+          - type: horizontal-stack
+            id: novy_hood
+            title: Dampkap
+            cards:
+             - type: entity-button
+               icon: mdi:fan
+               entity: script.novy_hood_on
+               tap_action:
+                 action: call-service
+                 service: script.turn_on
+                 service_data:
+                   entity_id: script.novy_hood_on
+             - type: entity-button
+               icon: mdi:fan-off
+               entity: script.novy_hood_off
+               tap_action:
+                 action: call-service
+                 service: script.turn_on
+                 service_data:
+                   entity_id: script.novy_hood_off
+             - type: entity-button
+               icon: mdi:car-parking-lights
+               entity: script.novy_hood_lights
+               tap_action:
+                 action: call-service
+                 service: script.turn_on
+                 service_data:
+                   entity_id: script.novy_hood_lights
+             - type: entity-button
+               icon: mdi:plus
+               entity: script.novy_hood_plus
+               tap_action:
+                 action: call-service
+                 service: script.turn_on
+                 service_data:
+                   entity_id: script.novy_hood_plus
+             - type: entity-button
+               icon: mdi:minus
+               entity: script.novy_hood_minus
+               tap_action:
+                 action: call-service
+                 service: script.turn_on
+                 service_data:
+                   entity_id: script.novy_hood_minus
+             - type: entity-button
+               icon: mdi:expand-all
+               entity: script.novy_hood_max
+               tap_action:
+                 action: call-service
+                 service: script.turn_on
+                 service_data:
+                   entity_id: script.novy_hood_max
+      - type: entities
+        title: Kelder
+        show_header_toggle: false
+        id: downstairs_cave
+        entities:
+         - sensor.current_electricity_tariff
+         - sensor.energiemeter_22
+         - sensor.elektriciteitsverbruik_dag_peak
+         - sensor.elektriciteitsverbruik_dag_offpeak
+         - sensor.electricity_price_day
+         - sensor.elektriciteitsverbruik_maand_peak
+         - sensor.elektriciteitsverbruik_maand_offpeak
+         - sensor.electricity_price_month
+         - sensor.ups_kelder_battery_charge
+#      - type: entities
+#        title: Verwarming
+#        id: heatingg
+#        entities:
+#          - input_select.thermostat_status
+#          - sensor.desired_temperature
+#          - sensor.heating_water_pressure
+#          - sensor.burner
+#          - sensor.hot_water_running
+#          - sensor.temperature_heating_flow
+#          - sensor.temperature_heating_return
+      - type: entities
+        title: Automaties
+        show_header_toggle: false
+        id: automations
+        entities:
+         - automation.everyone_gone
+      - type: entities
+        title: Gang
+        id: downstairs_hallway
+        entities:
+         - light.licht_gang_beneden_10
+         - input_boolean.gang_switch_state
+
+      - id: peoplehome
+        type: entity-filter
+        entities:
+          - device_tracker.gsm_ben
+          - device_tracker.gsm_bie
+        state_filter:
+          - 'home'
+        card:
+          type: glance
+          title: Wie is er thuis?
+    
+  - title: Eerste verdieping
+    id: firstfloor
+    cards:
+     - type: entities
+       show_header_toggle: false
+       title: Gang
+       id: firstfloor_hallway
+       entities:
+        - light.licht_gang_boven_11
+        - input_boolean.gang_switch_state
+     - type: entities
+       title: Slaapkamer Ben en Bie
+       id: master_bedroom
+       entities:
+        - input_boolean.ben_sleeping
+        - input_boolean.bie_sleeping
+     - type: entities
+       title: Slaapkamer Mathijs
+       show_header_toggle: false
+       id: bedroom_mathijs
+       entities:
+        - camera.ipcam_willem
+        - camera.ipcam_mathijs
+        - light.lamp_kamer_mathijs_24
+  - title: Tweede verdieping
+    id: secondfloor
+    cards:
+     - type: entities
+       title: Zolder
+       id: attic
+       entities:
+        - light.lamp_zolder_1_16
+        - light.lamp_zolder_2_15
+        - light.maantje_zolder_13
+     - type: light
+       entity: light.zolder_lampen
+
+
+  - title: Buiten
+    id: outside
+    cards:
+      - type: markdown
+        content: > 
+          # Ophaling huisvuil
+          
+          [[ sensor.garbage_collect.state ]]
+      - type: weather-forecast
+        entity: weather.thuis
+      - id: peoplegone
+        type: entity-filter
+        entities:
+          - device_tracker.gsm_ben
+          - device_tracker.gsm_bie
+        state_filter:
+          - 'not_home'
+        card:
+          type: glance
+          title: Wie is er weg van huis?
+
+      - type: picture-entity
+        entity: camera.buienradar
+
+  - title: Cameras
+    id: cameras
+    cards:
+     - camera_view: live
+       type: picture-entity
+       entity: camera.ipcam_willem
+     - camera_view: live
+       type: picture-entity
+       entity: camera.ipcam_mathijs

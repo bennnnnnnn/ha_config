@@ -1,0 +1,21 @@
+- platform: group
+  name: "Living lampen"
+  entities:
+   - light.grote_lamp_living_2
+   - light.kleine_lamp_living_2
+- platform: group
+  name: "Zolder lampen"
+  entities:
+   - light.lamp_zolder_1_16
+   - light.lamp_zolder_2_15
+
+- platform: group
+  name: "Gang lampen"
+  entities:
+   - light.licht_gang_beneden_10
+   - light.licht_gang_boven_11
+
+- platform: group
+  name: "Alert lampen"
+  entities:
+   - light.licht_terras_30

@@ -1,0 +1,9 @@
+- platform: kodi
+  host: !secret kodi_ip
+  name: osmcliving
+  username: !secret kodi_username
+  port: 80
+  password: !secret kodi_password
+  
+- platform: squeezebox
+  host: !secret squeezebox_ip

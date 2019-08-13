@@ -1,0 +1,159 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret latitude
+  longitude: !secret longitude
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 5
+  # metric for Metric, imperial for Imperial
+  unit_system: metric
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: Europe/Brussels
+
+recorder:
+  purge_keep_days: 60
+  purge_interval: 1
+  db_url: !secret db_url  
+
+# Enables the frontend
+frontend:
+  extra_html_url:
+   - /local/custom_ui/state-card-tiles.html
+  extra_html_url_es5:
+   - /local/custom_ui/state-card-tiles.html
+config:
+
+http:
+  # Uncomment this if you are using SSL or running in Docker etc
+  base_url: !secret base_url
+  use_x_forwarded_for: True
+  ip_ban_enabled: True
+  trusted_proxies: !secret trusted_proxies
+  login_attempts_threshold: !secret login_attempts
+
+# Checks for available updates
+updater:
+
+# Discover some devices automatically
+discovery:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Text to speech
+tts:
+  platform: google_translate
+  language: 'nl'
+
+# Enables support for tracking state changes over time.
+history:
+
+# View all events in a logbook
+logbook:
+
+# Track the sun
+sun:
+
+media_extractor:
+
+# Show the map
+map:
+
+#Mqtt platform
+mqtt:
+  broker: mqtt
+  port: 1883
+  client_id: home-assistant-1
+  keepalive: 60
+  username: !secret mqtt_username
+  password: !secret mqtt_password
+  discovery: true
+  discovery_prefix: homeassistant
+
+notify:
+  
+  - name: html5
+    platform: html5
+
+  - name: all
+    platform: group
+    services:
+      - service: html5
+
+google_assistant:
+  project_id: !secret google_assistant_project_id
+  api_key: !secret google_assistant_api_key
+  exposed_domains:
+    - switch
+    - light
+    - group
+    - script
+    - media_player
+
+vera:
+  vera_controller_url: !secret vera_url
+  lights: [ 10, 11, 13, 15, 16, 24 ]
+
+lovelace:
+  mode: yaml
+
+utility_meter:
+  elektriciteitsverbruik_dag:
+    source: sensor.electricity_usage
+    cycle: daily 
+    tariffs:
+      - peak
+      - offpeak
+  elektriciteitsverbruik_maand:
+    source: sensor.electricity_usage
+    cycle: monthly
+    tariffs:
+      - peak
+      - offpeak
+
+mobile_app:
+
+system_health:
+
+python_script:
+
+sensor: !include sensors.yaml
+
+switch: !include switches.yaml
+
+light: !include lights.yaml
+
+binary_sensor: !include binary_sensors.yaml
+
+input_boolean: !include input_boolean.yaml
+
+device_tracker: !include device_tracker.yaml
+
+zone: !include zones.yaml
+
+camera: !include cameras.yaml
+
+media_player: !include media_players.yaml
+
+scene: !include scenes.yaml
+
+group: !include groups.yaml
+
+automation: !include automations.yaml
+
+shell_command: !include shell_commands.yaml
+
+input_select: !include input_select.yaml
+
+#input_text: !include input_text.yaml
+
+input_number: !include input_number.yaml
+
+script: !include scripts.yaml
+
+cast: !include cast.yaml
+
+weather: !include weather.yaml
+
+#image_processing: !include image_processing.yaml

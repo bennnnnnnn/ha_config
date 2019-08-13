@@ -1,0 +1,16 @@
+prijs_kwh_offpeak:
+  name: Prijs per kWh nachttarief
+  initial: 0.2716
+  min: 0
+  max: 0.50
+  step: 0.001
+  mode: box
+  
+prijs_kwh_peak:
+  name: Prijs per kWh dagtarief
+  initial: 0.2716
+  min: 0
+  max: 0.50
+  step: 0.001
+  mode: box
+

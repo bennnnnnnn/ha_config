@@ -1,0 +1,13 @@
+- platform: generic
+  name: buienradar
+  still_image_url: https://api.buienradar.nl/image/1.0/radarmapbe?width=550&forc=37&hist=-1
+
+- platform: mjpeg
+  mjpeg_url: http://motion:8082
+  still_image_url: http://motion:8765/picture/2/current/
+  name: ipcam willem
+
+- platform: mjpeg
+  mjpeg_url: http://motion:8081
+  still_image_url: http://motion:8765/picture/1/current/
+  name: ipcam mathijs

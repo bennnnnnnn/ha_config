@@ -1,0 +1,301 @@
+send_sonyamp_ir:
+  alias: Sony amp IR service
+  sequence:
+    service: mqtt.publish
+    data_template:
+      topic: "home/OpenMQTTGateway-TV/commands/MQTTtoIR"
+      payload: '{"value": {{command}},"protocol_name":"IR_Sony","repeat":2,"bits":15}'
+
+
+tv_amp_mute:
+  alias: Mute versterker
+  sequence:
+    service: script.send_sonyamp_ir
+    data:
+      command: "5132"
+
+tv_amp_dvd:
+  alias: Set tv amp to DVD
+  sequence:
+    service: script.send_sonyamp_ir
+    data:
+      command: "24332"       
+       
+tv_amp_poweroff:
+  alias: Turn off tv amp
+  sequence:
+   - service: script.send_sonyamp_ir
+     data:
+       command: "15372"
+   - delay: '00:00:02'
+   - service: script.send_sonyamp_ir
+     data:
+       command: "21516"
+        
+tv_amp_video2:
+  alias: Set tv amp to video2
+  sequence:
+   - service: script.send_sonyamp_ir
+     data:
+       command: "15372"
+
+tv_amp_sacd:
+  alias: Set tv amp to sacd
+  sequence:
+   - service: script.send_sonyamp_ir
+     data:
+       command: "21004"
+
+
+tv_amp_volume_down_1:
+  alias: Versterker stiller
+  sequence:
+    service: script.send_sonyamp_ir
+    data:
+      command: "25612"
+
+
+tv_amp_volume_up_1:
+  alias: Versterker luider
+  sequence:
+    service: script.send_sonyamp_ir
+    data:
+      command: "9228"
+  
+tv_amp_volume_down_5:
+  alias: Versterker 5 stiller
+  sequence:
+   - service: script.send_sonyamp_ir
+     data:
+      command: "25612"
+   - delay:
+       milliseconds: 50
+   - service: script.send_sonyamp_ir
+     data:
+      command: "25612"
+   - delay:
+       milliseconds: 50
+   - service: script.send_sonyamp_ir
+     data:
+      command: "25612"
+   - delay:
+       milliseconds: 50
+   - service: script.send_sonyamp_ir
+     data:
+      command: "25612"
+   - delay:
+       milliseconds: 50
+   - service: script.send_sonyamp_ir
+     data:
+      command: "25612"
+   - delay:
+       milliseconds: 50
+   - service: script.send_sonyamp_ir
+     data:
+      command: "25612"
+
+tv_amp_volume_up_5:
+  alias: Versterker 5 luider
+  sequence:
+   - service: script.send_sonyamp_ir
+     data:
+      command: "9228"
+   - delay:
+       milliseconds: 50
+   - service: script.send_sonyamp_ir
+     data:
+      command: "9228"
+   - delay:
+       milliseconds: 50
+   - service: script.send_sonyamp_ir
+     data:
+      command: "9228"
+   - delay:
+       milliseconds: 50
+   - service: script.send_sonyamp_ir
+     data:
+      command: "9228"
+   - delay:
+       milliseconds: 50
+   - service: script.send_sonyamp_ir
+     data:
+      command: "9228"
+   - delay:
+       milliseconds: 50
+   - service: script.send_sonyamp_ir
+     data:
+      command: "9228"
+
+show_mathijscam:
+  alias: Show Mathijscam on kodi beneden
+  sequence:
+    service: media_player.play_media
+    entity_id: media_player.kodibeneden
+    data:
+      media_content_id: !secret mathijs_strm_url
+      media_content_type: 'video'
+
+show_willemcam:
+  alias: Show Willem on kodi beneden
+  sequence:
+    service: media_player.play_media
+    entity_id: media_player.kodibeneden
+    data:
+      media_content_id: !secret willem_strm_url
+      media_content_type: 'video'
+      
+stop_mathijscam:
+  alias: Stop Mathijscam on kodi beneden
+  sequence:
+    service: media_player.media_stop
+    entity_id: media_player.kodibeneden
+    
+push_red_button:
+  alias: rooie knop
+  sequence:
+   - service: media_player.play_media
+     entity_id: media_player.woonkamer
+     data:
+       media_content_id: !secret knop_green_url
+       media_content_type: 'audio/mp4'
+      
+push_orange_button:
+  alias: oranje knop
+  sequence:
+   - service: media_player.play_media
+     entity_id: media_player.woonkamer
+     data:
+       media_content_id: !secret knop_orange_url
+       media_content_type: 'audio/mp4'
+
+push_green_button:
+  alias: groene knop
+  sequence:
+   - service: media_player.play_media
+     entity_id: media_player.woonkamer
+     data:
+       media_content_id: !secret knop_green_url
+       media_content_type: 'audio/mp4'
+
+send_novy_hood:
+  alias: Novy dampkap 433mhz service
+  sequence:
+    service: mqtt.publish
+    data_template:
+      topic: "sonoff-bridge/cmnd/backlog"
+      payload: "rfraw {{raw_rf}}; rfraw 0"
+
+novy_hood_power:
+  alias: Dampkap power
+  sequence:
+    service: script.send_novy_hood
+    data:
+      raw_rf: AA B0 1B 03 08 019A 0302 3EBC 28091809180918091809181818091809091818 55
+
+novy_hood_lights:
+  alias: Dampkap lichten
+  sequence:
+    service: script.send_novy_hood
+    data:
+      raw_rf: AA B0 1B 03 08 019A 0302 3EC6 28091809180918091809181818091809090918 55
+
+novy_hood_plus:
+  alias: Dampkap plus
+  sequence:
+    service: script.send_novy_hood
+    data:
+      raw_rf: AA B0 15 03 08 01A4 0302 3E76 28091809180918091809180918 55
+
+novy_hood_minus:
+  alias: Dampkap min
+  sequence:
+    service: script.send_novy_hood
+    data:
+      raw_rf: AA B0 15 03 08 019A 030C 3E76 28091809180918091809181809 55
+
+novy_hood_on:
+  alias: Dampkap aan
+  sequence:
+   - service: script.novy_hood_plus
+   - delay:
+       milliseconds: 500
+   - service: script.novy_hood_minus
+
+novy_hood_off:
+  alias: Dampkap uit
+  sequence:
+   - service: script.novy_hood_plus
+   - delay:
+       milliseconds: 500
+   - service: script.novy_hood_power
+   - delay:
+       milliseconds: 500
+   - service: script.novy_hood_power
+
+novy_hood_max:
+  alias: Dampkap op maximum
+  sequence:
+   - service: script.novy_hood_plus
+   - delay:
+       milliseconds: 500
+   - service: script.novy_hood_plus
+   - delay:
+       milliseconds: 500
+   - service: script.novy_hood_plus
+   - delay:
+       milliseconds: 500
+   - service: script.novy_hood_plus
+
+smoke_alarm_action:
+  alias: Rookalarm actie
+  sequence:
+   - service: notify.notify
+     data_template: 
+       message: Brandalarm in {{smoke_name}} ({{ now().strftime('%H:%M %d/%m') }})!!!!
+       title: Brandalarm {{smoke_name}}!
+   - service: notify.mobile_app_gsm_ben
+     data_template: 
+       message: Brandalarm in {{smoke_name}} ({{ now().strftime('%H:%M %d/%m') }})!!!!
+       title: Brandalarm {{smoke_name}}!
+   - service: notify.mobile_app_gsm_bie
+     data_template: 
+       message: Brandalarm in {{smoke_name}} ({{ now().strftime('%H:%M %d/%m') }})!!!!
+       title: Brandalarm {{smoke_name}}!
+   - service: persistent_notification.create
+     data:
+       message: Brandalarm in {{smoke_name}} ({{ now().strftime('%H:%M %d/%m') }})!!!!
+       title: Brandalarm {{smoke_name}}!
+
+doorbell_action:
+  alias: Actie bij deurbel
+  sequence:
+   - service: notify.notify
+     data_template:
+       message: "Deurbel is gegaan! ({{ now().strftime('%H:%M %d/%m') }})"
+       title: "Deurbel"
+   - service: persistent_notification.create
+     data:
+       message: "Deurbel is gegaan! ({{ now().strftime('%H:%M %d/%m') }})"
+       title: "Deurbel"
+   - service: notify.mobile_app_gsm_ben
+     data:
+       message: "Deurbel is gegaan! ({{ now().strftime('%H:%M %d/%m') }})"
+       title: "Deurbel"
+   - service: notify.mobile_app_gsm_bie
+     data:
+       message: Deurbel is gegaan!
+       title: Deurbel
+   - service: tts.google_translate_say
+     entity_id: media_player.woonkamer
+     data:
+       message: Er wordt aan de deur gebeld!
+       language: nl
+   - service: python_script.light_flash
+     data:
+      entity: light.alert_lampen
+      flashes: 3
+
+   
+     
+
+   
