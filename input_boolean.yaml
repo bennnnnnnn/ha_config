@@ -6,3 +6,7 @@ ben_sleeping:
   name: Ben asleep
   initial: off
   icon: mdi:sleep
+gang_switch_state:
+  name: Wisselschakelaar gang
+  initial: off
+  icon: mdi:switch
