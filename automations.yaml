@@ -165,34 +165,6 @@
   action:
   - service: switch.turn_off
     entity_id: switch.bedroom_tv_switch
-- id: controll_hall_lights
-  alias: Control hall lights
-  trigger:
-  - platform: state
-    entity_id: switch.switch_gang_beneden_19
-  - platform: state
-    entity_id: switch.switch_gang_boven_21
-  action:
-    service: input_boolean.toggle
-    entity_id: input_boolean.gang_switch_state
-- id: lichten_gang_uit
-  alias: Lichten gang uit
-  trigger:
-    platform: state
-    entity_id: input_boolean.gang_switch_state
-    to: 'off'
-  action:
-    service: homeassistant.turn_off
-    entity_id: light.gang_lampen
-- id: lichten_gang_aan
-  alias: Lichten gang aan
-  trigger:
-    platform: state
-    entity_id: input_boolean.gang_switch_state
-    to: 'on'
-  action:
-    service: homeassistant.turn_on
-    entity_id: light.gang_lampen
 - id: turn_on_amp_on_media_start
   alias: Turn on amp on media start
   trigger:
