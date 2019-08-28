@@ -19,3 +19,4 @@
   name: "Alert lampen"
   entities:
    - light.licht_terras_30
+   - light.lamp_eetplaats_25
