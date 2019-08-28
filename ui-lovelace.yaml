@@ -186,7 +186,6 @@ views:
         id: downstairs_hallway
         entities:
          - light.licht_gang_beneden_10
-         - input_boolean.gang_switch_state
 
       - id: peoplehome
         type: entity-filter
@@ -208,7 +207,6 @@ views:
        id: firstfloor_hallway
        entities:
         - light.licht_gang_boven_11
-        - input_boolean.gang_switch_state
      - type: entities
        title: Slaapkamer Ben en Bie
        id: master_bedroom
