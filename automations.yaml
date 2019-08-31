@@ -605,7 +605,10 @@
    - condition: state
      entity_id: 'sun.sun'
      state: 'below_horizon'
+   - condition: state
+     entity_id: 'light.licht_gang_beneden_10'
+     state: 'off'  
   action:
-    service: script.open_door_action
-    data_template:
-      door: "{{ trigger.entity_id }}"
+    service: light.turn_on
+    data:
+      entity_id: 'light.licht_gang_beneden_10'
