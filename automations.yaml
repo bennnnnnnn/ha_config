@@ -544,7 +544,7 @@
   alias: Deursensor voordeur gesloten
   trigger:
    - platform: mqtt
-     topic: home/OpenMQTTGateway-TV/433toMQTT/27619868
+     topic: home/OpenMQTTGateway-TV/433toMQTT/13809930
   action:
    - service: mqtt.publish
      data:
@@ -577,3 +577,19 @@
        payload: "OFF"
        retain: true
        
+- id: open_doors_when_gone
+  alias: Checken of er deuren open gaan wanneer niemand thuis is
+  trigger:
+   - platform: state
+     entity_id: binary_sensor.voordeur
+     to: "on"
+   - platform: state
+     entity_id: binary_sensor.achterdeur
+     to: "on"
+
+  condition:
+   - condition: state
+     entity_id: 'group.people_group'
+     state: 'not_home'
+  action:
+   
