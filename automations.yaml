@@ -528,3 +528,52 @@
   action:
     service: script.doorbell_action
 
+- id: doorsensor_voordeur_open
+  alias: Deursensor voordeur open
+  trigger:
+   - platform: mqtt
+     topic: home/OpenMQTTGateway-TV/433toMQTT/13809934
+  action:
+   - service: mqtt.publish
+     data:
+       topic: doors/voordeur/status
+       payload: "ON"
+       retain: true
+       
+- id: doorsensor_voordeur_gesloten
+  alias: Deursensor voordeur gesloten
+  trigger:
+   - platform: mqtt
+     topic: home/OpenMQTTGateway-TV/433toMQTT/27619868
+  action:
+   - service: mqtt.publish
+     data:
+       topic: doors/voordeur/status
+       payload: "OFF"
+       retain: true
+       
+       
+- id: doorsensor_achterdeur_open
+  alias: Deursensor achterdeur open
+  trigger:
+   - platform: mqtt
+     topic: home/OpenMQTTGateway-TV/433toMQTT/13650442
+  action:
+   - service: mqtt.publish
+     data:
+       topic: doors/achterdeur/status
+       payload: "ON"
+       retain: true
+       
+- id: doorsensor_achterdeur_gesloten
+  alias: Deursensor achterdeur gesloten
+  trigger:
+   - platform: mqtt
+     topic: home/OpenMQTTGateway-TV/433toMQTT/13650446
+  action:
+   - service: mqtt.publish
+     data:
+       topic: doors/achterdeur/status
+       payload: "OFF"
+       retain: true
+       

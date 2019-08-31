@@ -1,0 +1,4 @@
+  - platform: mqtt
+    name: Voordeur
+    state_topic: "doors/voordeur/status"
+    device_class: door
