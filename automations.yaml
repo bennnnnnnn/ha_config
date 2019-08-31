@@ -586,10 +586,26 @@
    - platform: state
      entity_id: binary_sensor.achterdeur
      to: "on"
-
   condition:
    - condition: state
      entity_id: 'group.people_group'
      state: 'not_home'
   action:
-   
+    service: script.open_door_action
+    data_template:
+      door: "{{ trigger.entity_id }}"
+
+- id: light_on_for_open_front_door
+  alias: Licht gang beneden aan bij deur open
+  trigger:
+   - platform: state
+     entity_id: binary_sensor.voordeur
+     to: "on"
+  condition:
+   - condition: state
+     entity_id: 'sun.sun'
+     state: 'below_horizon'
+  action:
+    service: script.open_door_action
+    data_template:
+      door: "{{ trigger.entity_id }}"

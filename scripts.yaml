@@ -295,7 +295,21 @@ doorbell_action:
       entity: light.alert_lampen
       flashes: 3
 
-   
+open_door_action:
+  alias: Actie bij open deur indien niet thuis
+  sequence:
+   - service: persistent_notification.create
+     data_template:
+       message: "Deur ({{ door }}) is geopend! ({{ now().strftime('%H:%M %d/%m') }})"
+       title: "Deur geopend!"
+   - service: notify.mobile_app_gsm_ben
+     data_template:
+       message: "Deur ({{ door }}) is geopend! ({{ now().strftime('%H:%M %d/%m') }})"
+       title: "Deur geopend!"
+   - service: notify.mobile_app_gsm_bie
+     data_template:
+       message: "Deur ({{ door }}) is geopend! ({{ now().strftime('%H:%M %d/%m') }})"
+       title: "Deur geopend!"
      
 
    
