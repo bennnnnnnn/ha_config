@@ -97,7 +97,8 @@ views:
             entities:
              - light.lichten_keuken_29
              - light.led_strip_keuken_26
-             - light.lamp_eetplaats_25           
+             - light.lamp_eetplaats_25
+             - binary_sensor.achterdeur         
           - type: horizontal-stack
             id: novy_hood
             title: Dampkap
@@ -186,6 +187,7 @@ views:
         id: downstairs_hallway
         entities:
          - light.licht_gang_beneden_10
+         - binary_sensor.voordeur
 
       - id: peoplehome
         type: entity-filter

@@ -2,3 +2,8 @@
     name: Voordeur
     state_topic: "doors/voordeur/status"
     device_class: door
+  - platform: mqtt
+    name: Achterdeur
+    state_topic: "doors/achterdeur/status"
+    device_class: door
+
