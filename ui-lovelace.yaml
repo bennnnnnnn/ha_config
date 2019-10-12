@@ -216,23 +216,23 @@ views:
         - input_boolean.ben_sleeping
         - input_boolean.bie_sleeping
      - type: entities
-       title: Slaapkamer Mathijs
+       title: Slaapkamer Willem
        show_header_toggle: false
-       id: bedroom_mathijs
+       id: bedroom_willem
        entities:
         - camera.ipcam_willem
-        - camera.ipcam_mathijs
-        - light.lamp_kamer_mathijs_24
   - title: Tweede verdieping
     id: secondfloor
     cards:
      - type: entities
-       title: Zolder
-       id: attic
+       title: Slaapkamer Mathijs
+       id: bedroom_mathijs
        entities:
+        - camera.ipcam_mathijs
         - light.lamp_zolder_1_16
         - light.lamp_zolder_2_15
         - light.maantje_zolder_13
+        - light.lamp_kamer_mathijs_24
      - type: light
        entity: light.zolder_lampen
 
