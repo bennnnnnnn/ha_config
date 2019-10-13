@@ -221,6 +221,7 @@ views:
        id: bedroom_willem
        entities:
         - camera.ipcam_willem
+        - light.lamp_kamer_mathijs_24
   - title: Tweede verdieping
     id: secondfloor
     cards:
@@ -232,7 +233,6 @@ views:
         - light.lamp_zolder_1_16
         - light.lamp_zolder_2_15
         - light.maantje_zolder_13
-        - light.lamp_kamer_mathijs_24
      - type: light
        entity: light.zolder_lampen
 
