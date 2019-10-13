@@ -151,6 +151,9 @@ views:
                  service: script.turn_on
                  service_data:
                    entity_id: script.novy_hood_max
+          - type: media-control
+            entity: media_player.squeeze_keuken
+
       - type: entities
         title: Kelder
         show_header_toggle: false
