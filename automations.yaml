@@ -631,7 +631,7 @@
   action:
     service: light.toggle
     data:
-      entity_id: 'light.zolder_lampen'
+      entity_id: 'light.gang_lampen'
        
 - id: switch_mathijs_zolder_3
   alias: Rechterknop schakelaar zolder
