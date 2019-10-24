@@ -642,3 +642,34 @@
     service: light.toggle
     data:
       entity_id: 'light.maantje_zolder_13'
+
+
+- id: switch_slaapkamer_1
+  alias: Linkerknop slaapkamer
+  trigger:
+   - platform: mqtt
+     topic: home/OpenMQTTGateway-TV/433toMQTT/565986
+  action:
+    service: light.toggle
+    data:
+      entity_id: 'light.lamp_kamer_mathijs_24'
+
+- id: switch_slaapkamer_2
+  alias: Middenknop slaapkamer
+  trigger:
+   - platform: mqtt
+     topic: home/OpenMQTTGateway-TV/433toMQTT/565988
+  action:
+    service: light.toggle
+    data:
+      entity_id: 'light.gang_lampen'
+       
+- id: switch_slaapkamer_3
+  alias: Rechterknop slaapkamer
+  trigger:
+   - platform: mqtt
+     topic: home/OpenMQTTGateway-TV/433toMQTT/565992
+  action:
+    service: light.toggle
+    data:
+      entity_id: 'light.maantje_zolder_13'
