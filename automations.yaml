@@ -612,3 +612,33 @@
     service: light.turn_on
     data:
       entity_id: 'light.licht_gang_beneden_10'
+
+- id: switch_mathijs_zolder_1
+  alias: Linkerknop schakelaar zolder
+  trigger:
+   - platform: mqtt
+     topic: home/OpenMQTTGateway-TV/433toMQTT/886114
+  action:
+    service: light.toggle
+    data:
+      entity_id: 'light.zolder_lampen'
+
+- id: switch_mathijs_zolder_2
+  alias: Middenknop schakelaar zolder
+  trigger:
+   - platform: mqtt
+     topic: home/OpenMQTTGateway-TV/433toMQTT/886116
+  action:
+    service: light.toggle
+    data:
+      entity_id: 'light.zolder_lampen'
+       
+- id: switch_mathijs_zolder_3
+  alias: Rechterknop schakelaar zolder
+  trigger:
+   - platform: mqtt
+     topic: home/OpenMQTTGateway-TV/433toMQTT/886120
+  action:
+    service: light.toggle
+    data:
+      entity_id: 'light.maantje_zolder_13'
