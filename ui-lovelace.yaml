@@ -10,7 +10,6 @@ views:
         title: Living
         id: downstairs_living
         entities:
-         - switch.switch_living_tvdevs_14
          - binary_sensor.tv_downstairs
          - light.grote_lamp_living_2
          - light.kleine_lamp_living_2
