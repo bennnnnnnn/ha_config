@@ -3,7 +3,6 @@ turn_off_when_away:
   entities:
    - input_boolean.gang_switch_state
 #   - switch.bedroom_tv_switch
-   - switch.switch_living_tvdevs_14
    - light.living_lampen
    - light.zolder_lampen
    - light.gang_lampen
