@@ -191,9 +191,9 @@
   
 - platform: template
   sensors:
-    garbage-collect:
+    garbage_collect:
       value_template: '{{ states.sensor.garbageinfo.attributes["markdown_text"] }}'
-    next-garbage-collect:
+    next_garbage_collect:
       value_template: '{{ states.sensor.garbageinfo.attributes["next_event"] }}'
     electricity_usage: 
       friendly_name: Elektriciteitsverbruik

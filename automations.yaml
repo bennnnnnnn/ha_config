@@ -687,20 +687,21 @@
   trigger:
     platform: time
     at: "20:30:00"
-  condition: time
+  condition:
+    condition: time
     weekday:
-      - mon
+     - mon
   action:
    - service: tts.google_translate_say
      entity_id: media_player.woonkamer
      data_template:
-       message: "Niet vergeten! Morgen ophaling {{ states("sensor.next-garbage-collect") }}"
+       message: "Niet vergeten! Morgen ophaling {{ states('sensor.next_garbage_collect') }}"
        language: nl
    - service: notify.mobile_app_gsm_ben
-     data:
-       message: "Niet vergeten! Morgen ophaling {{ states("sensor.next-garbage-collect") }}"
+     data_template:
+       message: "Niet vergeten! Morgen ophaling {{ states('sensor.next_garbage_collect') }}"
        title: "Vuilnisophaling morgen!"
    - service: notify.mobile_app_gsm_bie
-     data:
-       message: "Niet vergeten! Morgen ophaling {{ states("sensor.next-garbage-collect") }}"
+     data_template:
+       message: "Niet vergeten! Morgen ophaling {{ states('sensor.next_garbage_collect') }}"
        title: "Vuilnisophaling morgen!"
