@@ -183,11 +183,18 @@
 
 - platform: rest
   resource: !secret garbage_collect_url
-  name: garbage-collect
-  value_template: '{{ value_json.markdown_text }}'
-
+  name: garbageinfo
+  json_attributes:
+   - markdown_text
+   - events
+   - next_event
+  
 - platform: template
   sensors:
+    garbage-collect:
+      value_template: '{{ states.sensor.garbageinfo.attributes["markdown_text"] }}'
+    next-garbage-collect
+      value_template: '{{ states.sensor.garbageinfo.attributes["next_event"] }}'
     electricity_usage: 
       friendly_name: Elektriciteitsverbruik
       unit_of_measurement: kwh
