@@ -310,6 +310,5 @@ open_door_action:
      data_template:
        message: "Deur ({{ door }}) is geopend! ({{ now().strftime('%H:%M %d/%m') }})"
        title: "Deur geopend!"
-     
-
+    
    

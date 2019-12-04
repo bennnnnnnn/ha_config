@@ -193,7 +193,7 @@
   sensors:
     garbage-collect:
       value_template: '{{ states.sensor.garbageinfo.attributes["markdown_text"] }}'
-    next-garbage-collect
+    next-garbage-collect:
       value_template: '{{ states.sensor.garbageinfo.attributes["next_event"] }}'
     electricity_usage: 
       friendly_name: Elektriciteitsverbruik
