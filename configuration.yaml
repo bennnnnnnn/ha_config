@@ -11,10 +11,18 @@ homeassistant:
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: Europe/Brussels
 
+influxdb:
+  host: !secret influxdb_host
+  username: !secret influxdb_username
+  password: !secret influxdb_password
+  tags: 
+    source: ha 
+
 recorder:
-  purge_keep_days: 60
+  purge_keep_days: 15
   purge_interval: 1
-  db_url: !secret db_url  
+  db_url: !secret db_url
+
 
 # Enables the frontend
 frontend:
