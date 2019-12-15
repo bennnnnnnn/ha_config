@@ -101,7 +101,7 @@ google_assistant:
 
 vera:
   vera_controller_url: !secret vera_url
-  lights: [ 10, 11, 13, 15, 16, 24 ]
+  lights: [ 10, 11, 13, 15, 16, 24, 35 ]
 
 lovelace:
   mode: yaml

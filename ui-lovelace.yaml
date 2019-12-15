@@ -18,6 +18,7 @@ views:
          - sensor.living_humidity
          - sensor.living_light_amount
          - sensor.living_noise
+         - light.kerstboom_35
       - type: light
         entity: light.living_lampen
       - type: media-control

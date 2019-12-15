@@ -1,8 +1,6 @@
 turn_off_when_away:
   name: Uitzetten bij weggaan
   entities:
-   - input_boolean.gang_switch_state
-#   - switch.bedroom_tv_switch
    - light.living_lampen
    - light.zolder_lampen
    - light.gang_lampen
@@ -11,11 +9,12 @@ turn_off_when_away:
    - light.led_strip_keuken_26
    - light.licht_terras_30
    - light.lichten_keuken_29
+   - light.kerstboom_35
 
 turn_on_when_home:
   name: Aanzetten bij thuiskomen
   entities:
-   - switch.switch_living_tvdevs_14
+   - light.kerstboom_35
 
 people_group:
   name: People
