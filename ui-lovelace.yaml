@@ -241,11 +241,12 @@ views:
     id: outside
     cards:
       - type: markdown
-        #entity_id: sensor.garbage_collect
+        entity_id: sensor.garbage_collect
         content: >
           # Huisvuilophaling
 
-          {{ states(sensor.garbage_collect) }}
+
+          {{ states("sensor.garbage_collect") }}
       - type: weather-forecast
         entity: weather.thuis
       - id: peoplegone
