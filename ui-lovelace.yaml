@@ -1,7 +1,4 @@
 title: Huisje Bie Ben Mathijs en Willem
-resources:
-  - url: /local/plugins/markdown-mod.js
-    type: module
 views:
   - title: Beneden
     id: downstairs
@@ -86,7 +83,7 @@ views:
         title: GSMs
         id: cellphones
         entities:
-         - sensor.gsm_ben_battery_sensor
+         - sensor.gsm_ben_battery_sensor_3
          - sensor.gsm_bie_battery_sensor
       - type: vertical-stack
         title: Keuken
@@ -195,8 +192,8 @@ views:
       - id: peoplehome
         type: entity-filter
         entities:
-          - device_tracker.gsm_ben
-          - device_tracker.gsm_bie
+          - person.ben
+          - person.bie
         state_filter:
           - 'home'
         card:
@@ -244,17 +241,18 @@ views:
     id: outside
     cards:
       - type: markdown
+        entity_id: sensor.garbage_collect
         content: > 
           # Ophaling huisvuil
           
-          [[ sensor.garbage_collect.state ]]
+          {{ sensor.garbage_collect.state }}
       - type: weather-forecast
         entity: weather.thuis
       - id: peoplegone
         type: entity-filter
         entities:
-          - device_tracker.gsm_ben
-          - device_tracker.gsm_bie
+          - person.ben
+          - person.gsm_bie
         state_filter:
           - 'not_home'
         card:
