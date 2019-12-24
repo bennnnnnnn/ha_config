@@ -283,7 +283,7 @@ doorbell_action:
        title: "Deurbel"
    - service: notify.mobile_app_gsm_bie
      data:
-       message: Deurbel is gegaan!
+       message: "Deurbel is gegaan! ({{ now().strftime('%H:%M %d/%m') }})"
        title: Deurbel
    - service: tts.google_translate_say
      entity_id: media_player.woonkamer
