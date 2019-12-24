@@ -226,17 +226,3 @@
         {% else %}
           Dagtarief
         {% endif %}
-
-- platform: template
-  sensors:
-    gsm_ben_battery_sensor:
-      friendly_name: "Batterij GSM Ben"
-      unit_of_measurement: '%'
-      value_template: "{{ state_attr('device_tracker.gsm_ben', 'battery_level') }}"
-
-- platform: template
-  sensors:
-    gsm_bie_battery_sensor:
-      friendly_name: "Batterij GSM Bie"
-      unit_of_measurement: '%'
-      value_template: "{{ state_attr('device_tracker.gsm_bie', 'battery_level') }}"
