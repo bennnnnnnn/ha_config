@@ -241,18 +241,18 @@ views:
     id: outside
     cards:
       - type: markdown
-        entity_id: sensor.garbage_collect
-        content: > 
-          # Ophaling huisvuil
-          
-          {{ sensor.garbage_collect.state }}
+        #entity_id: sensor.garbage_collect
+        content: >
+          # Huisvuilophaling
+
+          {{ states(sensor.garbage_collect) }}
       - type: weather-forecast
         entity: weather.thuis
       - id: peoplegone
         type: entity-filter
         entities:
           - person.ben
-          - person.gsm_bie
+          - person.bie
         state_filter:
           - 'not_home'
         card:
