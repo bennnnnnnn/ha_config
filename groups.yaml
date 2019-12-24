@@ -19,8 +19,8 @@ turn_on_when_home:
 people_group:
   name: People
   entities:
-   - device_tracker.gsm_ben
-   - device_tracker.gsm_bie
+   - person.ben
+   - person.bie
 
 switches_gang:
   name: Switchen gang
