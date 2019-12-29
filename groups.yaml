@@ -8,7 +8,7 @@ turn_off_when_away:
    - light.lamp_eetplaats_25
    - light.led_strip_keuken_26
    - light.licht_terras_30
-   - light.lichten_keuken_29
+#   - light.lichten_keuken_29
    - light.kerstboom_35
 
 turn_on_when_home:
