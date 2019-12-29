@@ -186,7 +186,7 @@
     value_template: "{{ trigger.payload_json['value'] == 13361634 }}"
   action:
     service: light.toggle
-    entity_id: light.grote_lamp_living_2
+    entity_id: light.grote_lamp_living
 - id: remote_1_c_kleine_lamp_living
   alias: Toggle kleine lamp living on pressing c on remote 1
   trigger:
@@ -197,7 +197,7 @@
     value_template: "{{ trigger.payload_json['value'] == 13361633 }}"
   action:
     service: light.toggle
-    entity_id: light.kleine_lamp_living_2
+    entity_id: light.kleine_lamp_living
 - id: remote_1_B_grote_lamp_living
   alias: Toggle grote lamp living on pressing B on remote 1
   trigger:
@@ -208,7 +208,7 @@
     value_template: "{{ trigger.payload_json['value'] == 13361640 }}"
   action:
   - service: light.toggle
-    entity_id: light.grote_lamp_living_2
+    entity_id: light.grote_lamp_living
 - id: remote_1_d_kleine_lamp_living
   alias: Toggle kleine lamp living on pressing d on remote 1
   trigger:
@@ -219,7 +219,7 @@
     value_template: "{{ trigger.payload_json['value'] == 13361636 }}"
   action:
   - service: light.toggle
-    entity_id: light.kleine_lamp_living_2
+    entity_id: light.kleine_lamp_living
 - id: turn_off_living_light_sunrise
   alias: Turn off living light sunrise
   trigger:

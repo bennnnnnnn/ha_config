@@ -8,8 +8,8 @@ views:
         id: downstairs_living
         entities:
          - binary_sensor.tv_downstairs
-         - light.grote_lamp_living_2
-         - light.kleine_lamp_living_2
+         - light.grote_lamp_living
+         - light.kleine_lamp_living
          - sensor.living_temperature
          - sensor.living_air_quality
          - sensor.living_humidity
