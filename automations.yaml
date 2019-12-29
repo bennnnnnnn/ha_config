@@ -183,7 +183,7 @@
     topic: home/OpenMQTTGateway-TV/433toMQTT
   condition:
     condition: template
-    value_template: "{{ trigger.payload_json['value'] == 13361634
+    value_template: "{{ trigger.payload_json['value'] == 13361634 }}"
   action:
     service: light.toggle
     entity_id: light.grote_lamp_living_2
@@ -194,7 +194,7 @@
     topic: home/OpenMQTTGateway-TV/433toMQTT
   condition:
     condition: template
-    value_template: "{{ trigger.payload_json['value'] == 13361633
+    value_template: "{{ trigger.payload_json['value'] == 13361633 }}"
   action:
     service: light.toggle
     entity_id: light.kleine_lamp_living_2
@@ -205,7 +205,7 @@
     topic: home/OpenMQTTGateway-TV/433toMQTT
   condition:
     condition: template
-    value_template: "{{ trigger.payload_json['value'] == 13361640
+    value_template: "{{ trigger.payload_json['value'] == 13361640 }}"
   action:
   - service: light.toggle
     entity_id: light.grote_lamp_living_2
@@ -216,7 +216,7 @@
     topic: home/OpenMQTTGateway-TV/433toMQTT
   condition:
     condition: template
-    value_template: "{{ trigger.payload_json['value'] == 13361636
+    value_template: "{{ trigger.payload_json['value'] == 13361636 }}"
   action:
   - service: light.toggle
     entity_id: light.kleine_lamp_living_2
@@ -249,7 +249,7 @@
     topic: home/OpenMQTTGateway-TV/433toMQTT
   condition:
     condition: template
-    value_template: "{{ trigger.payload_json['value'] == 139987
+    value_template: "{{ trigger.payload_json['value'] == 139987 }}"
   action:
   - service: light.toggle
     entity_id: light.lamp_kamer_mathijs_24
@@ -260,7 +260,7 @@
     topic: home/OpenMQTTGateway-TV/433toMQTT
   condition:
     condition: template
-    value_template: "{{ trigger.payload_json['value'] == 8959201
+    value_template: "{{ trigger.payload_json['value'] == 8959201 }}"
   action:
   - service: light.toggle
     entity_id: light.lamp_kamer_mathijs_24
@@ -271,7 +271,7 @@
     topic: home/OpenMQTTGateway-TV/433toMQTT
   condition:
     condition: template
-    value_template: "{{ trigger.payload_json['value'] == 8959208
+    value_template: "{{ trigger.payload_json['value'] == 8959208 }}"
   action:
   - service: light.toggle
     entity_id: light.lamp_kamer_mathijs_24
@@ -282,7 +282,7 @@
     topic: home/OpenMQTTGateway-TV/433toMQTT
   condition:
     condition: template
-    value_template: "{{ trigger.payload_json['value'] == 8959202
+    value_template: "{{ trigger.payload_json['value'] == 8959202 }}"
   action:
   - service: light.toggle
     entity_id: light.lamp_kamer_mathijs_24
@@ -511,7 +511,7 @@
      topic: "home/OpenMQTTGateway-TV/433toMQTT"
   condition:
     condition: template
-    value_template: "{{ trigger.payload_json['value'] == 12290571
+    value_template: "{{ trigger.payload_json['value'] == 12290571 }}"
   action:
     service: script.smoke_alarm_action
     data:
@@ -524,7 +524,7 @@
      topic: "home/OpenMQTTGateway-TV/433toMQTT"
   condition:
     condition: template
-    value_template: "{{ trigger.payload_json['value'] == 7817739
+    value_template: "{{ trigger.payload_json['value'] == 7817739 }}"
   action:
     service: script.smoke_alarm_action
     data:
@@ -534,7 +534,10 @@
   alias: Rookdetectie 2e verdiep
   trigger:
    - platform: mqtt
-     topic: "home/OpenMQTTGateway-TV/433toMQTT/16566795"
+     topic: "home/OpenMQTTGateway-TV/433toMQTT"
+  condition:
+    condition: template
+    value_template: "{{ trigger.payload_json['value'] == 16566795 }}"
   action:
     service: script.smoke_alarm_action
     data:
@@ -544,7 +547,10 @@
   alias: Rookdetectie gang gelijkvloers
   trigger:
    - platform: mqtt
-     topic: "home/OpenMQTTGateway-TV/433toMQTT/7981579"
+     topic: "home/OpenMQTTGateway-TV/433toMQTT"
+  condition:
+    condition: template
+    value_template: "{{ trigger.payload_json['value'] == 7981579 }}"
   action:
     service: script.smoke_alarm_action
     data:
@@ -554,7 +560,10 @@
   alias: Deurbel
   trigger:
    - platform: mqtt
-     topic: home/OpenMQTTGateway-TV/433toMQTT/42128
+     topic: home/OpenMQTTGateway-TV/433toMQTT
+  condition:
+    condition: template
+    value_template: "{{ trigger.payload_json['value'] == 42128 }}"
   action:
     service: script.doorbell_action
 
@@ -562,7 +571,10 @@
   alias: Deursensor voordeur open
   trigger:
    - platform: mqtt
-     topic: home/OpenMQTTGateway-TV/433toMQTT/13809934
+     topic: home/OpenMQTTGateway-TV/433toMQTT
+  condition:
+    condition: template
+    value_template: "{{ trigger.payload_json['value'] == 13809934 }}"
   action:
    - service: mqtt.publish
      data:
@@ -574,7 +586,10 @@
   alias: Deursensor voordeur gesloten
   trigger:
    - platform: mqtt
-     topic: home/OpenMQTTGateway-TV/433toMQTT/13809930
+     topic: home/OpenMQTTGateway-TV/433toMQTT
+  condition:
+    condition: template
+    value_template: "{{ trigger.payload_json['value'] == 13809930 }}"
   action:
    - service: mqtt.publish
      data:
@@ -587,7 +602,10 @@
   alias: Deursensor achterdeur open
   trigger:
    - platform: mqtt
-     topic: home/OpenMQTTGateway-TV/433toMQTT/13650442
+     topic: home/OpenMQTTGateway-TV/433toMQTT
+  condition:
+    condition: template
+    value_template: "{{ trigger.payload_json['value'] == 13650442 }}"
   action:
    - service: mqtt.publish
      data:
@@ -599,7 +617,10 @@
   alias: Deursensor achterdeur gesloten
   trigger:
    - platform: mqtt
-     topic: home/OpenMQTTGateway-TV/433toMQTT/13650446
+     topic: home/OpenMQTTGateway-TV/433toMQTT
+  condition:
+    condition: template
+    value_template: "{{ trigger.payload_json['value'] == 13650446 }}"
   action:
    - service: mqtt.publish
      data:
@@ -647,7 +668,10 @@
   alias: Linkerknop schakelaar zolder
   trigger:
    - platform: mqtt
-     topic: home/OpenMQTTGateway-TV/433toMQTT/886114
+     topic: home/OpenMQTTGateway-TV/433toMQTT
+  condition:
+    condition: template
+    value_template: "{{ trigger.payload_json['value'] == 886114 }}"
   action:
     service: light.toggle
     data:
@@ -657,7 +681,10 @@
   alias: Middenknop schakelaar zolder
   trigger:
    - platform: mqtt
-     topic: home/OpenMQTTGateway-TV/433toMQTT/886116
+     topic: home/OpenMQTTGateway-TV/433toMQTT
+  condition:
+    condition: template
+    value_template: "{{ trigger.payload_json['value'] == 886116 }}"
   action:
     service: light.toggle
     data:
@@ -667,7 +694,10 @@
   alias: Rechterknop schakelaar zolder
   trigger:
    - platform: mqtt
-     topic: home/OpenMQTTGateway-TV/433toMQTT/886120
+     topic: home/OpenMQTTGateway-TV/433toMQTT
+  condition:
+    condition: template
+    value_template: "{{ trigger.payload_json['value'] == 886120 }}"
   action:
     service: light.toggle
     data:
@@ -678,7 +708,10 @@
   alias: Linkerknop slaapkamer
   trigger:
    - platform: mqtt
-     topic: home/OpenMQTTGateway-TV/433toMQTT/565986
+     topic: home/OpenMQTTGateway-TV/433toMQTT
+  condition:
+    condition: template
+    value_template: "{{ trigger.payload_json['value'] == 565986 }}"
   action:
     service: light.toggle
     data:
@@ -688,7 +721,10 @@
   alias: Middenknop slaapkamer
   trigger:
    - platform: mqtt
-     topic: home/OpenMQTTGateway-TV/433toMQTT/565988
+     topic: home/OpenMQTTGateway-TV/433toMQTT
+  condition:
+    condition: template
+    value_template: "{{ trigger.payload_json['value'] == 565988 }}"
   action:
     service: light.toggle
     data:
@@ -698,7 +734,10 @@
   alias: Rechterknop slaapkamer
   trigger:
    - platform: mqtt
-     topic: home/OpenMQTTGateway-TV/433toMQTT/565992
+     topic: home/OpenMQTTGateway-TV/433toMQTT
+  condition:
+    condition: template
+    value_template: "{{ trigger.payload_json['value'] == 565992 }}"
   action:
     service: light.toggle
     data:
