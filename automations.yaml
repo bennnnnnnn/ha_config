@@ -10,7 +10,6 @@
       minutes: 5
       seconds: 0
   action:
-  - service: scripts.novy_hood_off
   - service: scene.turn_on
     data:
       entity_id: scene.away_sleeping
