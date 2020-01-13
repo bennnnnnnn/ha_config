@@ -561,7 +561,11 @@
     condition: template
     value_template: "{{ trigger.payload_json['value'] == 42128 }}"
   action:
-    service: script.doorbell_action
+    - service: script.doorbell_action
+    - condition: state
+      entity_id: group.people_group
+      state: 'home'
+    - service: script.doorbell_flash
 
 - id: doorsensor_voordeur_open
   alias: Deursensor voordeur open
