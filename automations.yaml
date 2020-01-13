@@ -739,14 +739,6 @@
     data:
       entity_id: 'light.maantje_zolder_13'
 
-- id: dampkap_lichten_switch_keuken
-  alias: Dampkap lichten aan bij aanzetten keukenlichten
-  trigger:
-    platform: state
-    entity_id: light.lichten_keuken_29
-  action:
-    service: script.novy_hood_lights
-
 - id: garbage_collection_notify
   alias: Garbage collection notification
   trigger:
