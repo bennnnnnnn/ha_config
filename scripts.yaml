@@ -267,7 +267,7 @@ smoke_alarm_action:
        title: Brandalarm {{smoke_name}}!
 
 doorbell_action:
-  alias: Actie bij deurbel
+  alias: Bericht bij deurbel
   sequence:
    - service: notify.notify
      data_template:
@@ -285,6 +285,11 @@ doorbell_action:
      data:
        message: "Deurbel is gegaan! ({{ now().strftime('%H:%M %d/%m') }})"
        title: Deurbel
+
+
+doorbell_flash:
+  alias: Flash lampen bij deurbel
+  sequence:
    - service: tts.google_translate_say
      entity_id: media_player.woonkamer
      data:

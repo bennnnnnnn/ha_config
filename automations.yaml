@@ -150,17 +150,17 @@
     data_template:
       entity_id: input_select.tv_amp_source
       option: --Uit--
-- id: switch_off_kodi_bedroom
-  alias: Switch off kodi-slaapkamer when it is powered down
-  trigger:
-    platform: state
-    entity_id: media_player.kodislaapkamer
-    to: 'off'
-    for:
-      seconds: 10
-  action:
-  - service: switch.turn_off
-    entity_id: switch.bedroom_tv_switch
+#- id: switch_off_kodi_bedroom
+#  alias: Switch off kodi-slaapkamer when it is powered down
+#  trigger:
+#    platform: state
+#    entity_id: media_player.kodislaapkamer
+#    to: 'off'
+#    for:
+#      seconds: 10
+#  action:
+#  - service: switch.turn_off
+#    entity_id: switch.bedroom_tv_switch
 - id: turn_on_amp_on_media_start
   alias: Turn on amp on media start
   trigger:
@@ -385,11 +385,11 @@
   alias: Warn for low cellphone battery Ben
   trigger:
     platform: numeric_state
-    entity_id: sensor.gsm_ben_battery_sensor
+    entity_id: sensor.gsm_ben_battery_sensor_3
     below: 15
   condition:
     condition: template
-    value_template: '{{ states.sensor.gsm_ben_battery_sensor.attributes[''power'']
+    value_template: '{{ states.sensor.gsm_ben_battery_sensor_3.attributes[''power'']
       == ''Unplugged'' }}'
   action:
     service: tts.google_translate_say

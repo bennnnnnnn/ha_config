@@ -2,7 +2,7 @@
   host: !secret kodi_ip
   name: osmcliving
   username: !secret kodi_username
-  port: 80
+  port: 8080
   password: !secret kodi_password
   
 - platform: squeezebox
