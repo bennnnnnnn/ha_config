@@ -12,12 +12,10 @@
 - platform: group
   name: "Gang lampen"
   entities:
-   - light.licht_gang_beneden_10
-   - light.licht_gang_boven_11
+   - light.lichten_gang_39
 
 - platform: group
   name: "Alert lampen"
   entities:
    - light.licht_terras_30
-   - light.lamp_eetplaats_25
    - light.kerstboom_35

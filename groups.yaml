@@ -9,6 +9,7 @@ turn_off_when_away:
    - light.licht_terras_30
 #   - light.lichten_keuken_29
    - light.kerstboom_35
+   - light.lichten_gang_39
 
 turn_on_when_home:
   name: Aanzetten bij thuiskomen

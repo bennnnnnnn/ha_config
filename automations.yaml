@@ -657,12 +657,12 @@
      entity_id: 'sun.sun'
      state: 'below_horizon'
    - condition: state
-     entity_id: 'light.licht_gang_beneden_10'
+     entity_id: 'light.lichten_gang_39'
      state: 'off'  
   action:
     service: light.turn_on
     data:
-      entity_id: 'light.licht_gang_beneden_10'
+      entity_id: 'light.lichten_gang_39'
 
 - id: switch_mathijs_zolder_1
   alias: Linkerknop schakelaar zolder
