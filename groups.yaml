@@ -3,7 +3,6 @@ turn_off_when_away:
   entities:
    - light.living_lampen
    - light.zolder_lampen
-   - light.gang_lampen
    - light.maantje_zolder_13
    - light.lamp_eetplaats_25
    - light.led_strip_keuken_26
@@ -21,9 +20,3 @@ people_group:
   entities:
    - person.ben
    - person.bie
-
-switches_gang:
-  name: Switchen gang
-  entities:
-   - switch.switch_gang_beneden_19
-   - switch.switch_gang_boven_21
