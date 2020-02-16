@@ -79,6 +79,11 @@ views:
                   entity_id: script.tv_amp_volume_down_1
 
       - type: entities
+        title: Bureau
+        id: bureau
+        entities:
+         - light.licht_gang_beneden_10
+      - type: entities
         show_header_toggle: false
         title: GSMs
         id: cellphones
