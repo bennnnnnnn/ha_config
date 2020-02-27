@@ -15,7 +15,6 @@ views:
          - sensor.living_humidity
          - sensor.living_light_amount
          - sensor.living_noise
-         - light.kerstboom_35
       - type: light
         entity: light.living_lampen
       - type: media-control
@@ -100,6 +99,7 @@ views:
              - light.lichten_keuken_29
              - light.led_strip_keuken_26
              - light.lamp_eetplaats_25
+             - light.kerstboom_35
              - binary_sensor.achterdeur         
           - type: horizontal-stack
             id: novy_hood
