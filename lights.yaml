@@ -3,6 +3,7 @@
   entities:
    - light.grote_lamp_living
    - light.kleine_lamp_living
+
 - platform: group
   name: "Zolder lampen"
   entities:
