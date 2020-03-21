@@ -14,6 +14,7 @@
 
 - platform: onvif
   host: 192.168.20.4
+  port: 80
   name: ipcam_oprit
   username: !secret dahua_username
   password: !secret dahua_password
