@@ -28,7 +28,6 @@ recorder:
     - script
     - automation
 
-
 # Enables the frontend
 frontend:
   extra_html_url:
@@ -93,6 +92,9 @@ notify:
     platform: group
     services:
       - service: html5
+
+ffmpeg:
+
 
 google_assistant:
   project_id: !secret google_assistant_project_id

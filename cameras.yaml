@@ -11,3 +11,9 @@
   mjpeg_url: http://motion:8081
   still_image_url: http://motion:8765/picture/1/current/
   name: ipcam mathijs
+
+- platform: onvif
+  host: 192.168.20.4
+  name: ipcam_oprit
+  username: !secret dahua_username
+  password: !secret dahua_password
