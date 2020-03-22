@@ -742,6 +742,45 @@
     service: light.toggle
     data:
       entity_id: 'light.maantje_zolder_13'
+      
+- id: bewegingssensor_schuifdeur
+  alias: Bewegingssensor schuifdeur
+  trigger:
+   - platform: mqtt
+     topic: home/OpenMQTTGateway-TV/433toMQTT
+  condition:
+    condition: template
+    value_template: "{{ trigger.payload_json['value'] == 13780286 }}"
+  action:
+    service: timer.start
+    data:
+      entity_id: 'timer.licht_terras'
+
+- id: bewegingssensor_start
+  trigger:
+    platform: event
+    event_type: timer.started
+    event_data:
+      entity_id: timer.licht_terras
+    action:
+      service: light_turn_on
+      data:
+        entity_id:
+          - light.licht_terras_30
+     
+      
+- id: bewegingssensor_stop
+  trigger:
+    platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.licht_terras
+    action:
+      service: light_turn_off
+      data:
+        entity_id:
+          - light.licht_terras_30
+     
 
 - id: garbage_collection_notify
   alias: Garbage collection notification
