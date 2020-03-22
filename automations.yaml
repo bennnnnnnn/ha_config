@@ -742,7 +742,7 @@
     service: light.toggle
     data:
       entity_id: 'light.maantje_zolder_13'
-      duration: '00:01:00'
+
 - id: bewegingssensor_schuifdeur
   alias: Bewegingssensor schuifdeur
   trigger:
@@ -755,7 +755,7 @@
     service: timer.start
     data:
       entity_id: 'timer.licht_terras'
-      
+      duration: 60
   condition:
     condition: state
     entity_id: sun.sun
