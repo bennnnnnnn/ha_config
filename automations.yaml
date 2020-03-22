@@ -755,6 +755,10 @@
     service: timer.start
     data:
       entity_id: 'timer.licht_terras'
+  condition:
+    condition: state
+    entity_id: sun.sun
+    state: 'below_horizon'
 
 - id: bewegingssensor_start
   trigger:
@@ -762,12 +766,12 @@
     event_type: timer.started
     event_data:
       entity_id: timer.licht_terras
-    action:
-      service: light_turn_on
-      data:
-        entity_id:
-          - light.licht_terras_30
-     
+  action:
+    service: light_turn_on
+    data:
+      entity_id:
+        - light.licht_terras_30
+
       
 - id: bewegingssensor_stop
   trigger:
@@ -775,12 +779,22 @@
     event_type: timer.finished
     event_data:
       entity_id: timer.licht_terras
-    action:
-      service: light_turn_off
-      data:
-        entity_id:
-          - light.licht_terras_30
+  action:
+    service: light_turn_off
+    data:
+      entity_id:
+        - light.licht_terras_30
      
+- id: bewegingssensor_cancel
+  trigger:
+    platform: state
+    entity_id: light.licht_terras_30
+    to: "off"
+  action:
+    service: timer.cancel
+    data:
+      entity_id:
+        - timer.licht_terras
 
 - id: garbage_collection_notify
   alias: Garbage collection notification
