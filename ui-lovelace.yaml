@@ -268,7 +268,7 @@ views:
       - type: picture-entity
         entity: camera.buienradar
       - type: picture-entity
-        entity: camera.ipcam_oprit
+        entity: camera.ipcam_oprit_2
         
 
   - title: Cameras
@@ -282,7 +282,7 @@ views:
        entity: camera.ipcam_mathijs
      - camera_view: live
        type: picture-entity
-       entity: camera.ipcam_oprit
+       entity: camera.ipcam_oprit_2
   - title: LMS Controls
     cards:
       - type: vertical-stack
