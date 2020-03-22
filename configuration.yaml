@@ -175,3 +175,5 @@ cast: !include cast.yaml
 weather: !include weather.yaml
 
 #image_processing: !include image_processing.yaml
+
+timer: !include timers.yaml
