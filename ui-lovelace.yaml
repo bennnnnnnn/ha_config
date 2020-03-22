@@ -1,5 +1,59 @@
 title: Huisje Bie Ben Mathijs en Willem
 views:
+  - title: Dashboard
+    id: dashboard
+    cards:     
+      - type: markdown
+        entity_id: sensor.garbage_collect
+        content: >
+          # Huisvuilophaling
+          
+          
+          {{ states("sensor.garbage_collect") }}
+      - type: weather-forecast
+        entity: weather.thuis
+      - camera_view: live
+       type: picture-entity
+       entity: camera.ipcam_willem
+      - type: entity-filter
+        card:
+          type: glance
+          title: Lichten aan
+        entities:
+          - entity: light.kleine_lamp_living
+          - entity: light.grote_lamp_living
+          - entity: light.kerstboom_35
+          - entity: light.lamp_eetplaats_25
+          - entity: light.lamp_kamer_mathijs_24
+          - entity: light.lamp_zolder_1_16
+          - entity: light.lamp_zolder_2_15
+          - entity: light.led_strip_keuken_26
+          - entity: light.licht_gang_beneden_10
+          - entity: light.licht_gang_boven_11
+          - entity: light.licht_terras_30
+          - entity: light.lichten_gang_39
+          - entity: light.lichten_keuken_29
+          - entity: light.maantje_zolder_13
+        state_filter:
+          - on
+        show_empty: false
+      - type: entities
+        show_header_toggle: false
+        title: GSMs
+        id: cellphones
+        entities:
+         - sensor.gsm_ben_battery_sensor_3
+         - sensor.gsm_bie_battery_sensor
+      - camera_view: live
+        type: picture-entity
+        entity: camera.ipcam_willem
+      - camera_view: live
+        type: picture-entity
+        entity: camera.ipcam_mathijs
+      - camera_view: live
+        type: picture-entity
+        entity: camera.ipcam_oprit_2
+
   - title: Beneden
     id: downstairs
     cards:
