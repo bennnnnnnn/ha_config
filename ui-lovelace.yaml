@@ -10,32 +10,34 @@ views:
           
           
           {{ states("sensor.garbage_collect") }}
+          
       - type: weather-forecast
         entity: weather.thuis
       - camera_view: live
-       type: picture-entity
-       entity: camera.ipcam_willem
+        type: picture-entity
+        entity: camera.buienradar
       - type: entity-filter
         card:
           type: glance
           title: Lichten aan
         entities:
-          - entity: light.kleine_lamp_living
-          - entity: light.grote_lamp_living
-          - entity: light.kerstboom_35
-          - entity: light.lamp_eetplaats_25
-          - entity: light.lamp_kamer_mathijs_24
-          - entity: light.lamp_zolder_1_16
-          - entity: light.lamp_zolder_2_15
-          - entity: light.led_strip_keuken_26
-          - entity: light.licht_gang_beneden_10
-          - entity: light.licht_gang_boven_11
-          - entity: light.licht_terras_30
-          - entity: light.lichten_gang_39
-          - entity: light.lichten_keuken_29
-          - entity: light.maantje_zolder_13
+          - light.kleine_lamp_living
+          - light.grote_lamp_living
+          - light.kerstboom_35
+          - light.lamp_eetplaats_25
+          - light.lamp_kamer_mathijs_24
+          - light.lamp_zolder_1_16
+          - light.lamp_zolder_2_15
+          - light.led_strip_keuken_26
+          - light.licht_gang_beneden_10
+          - light.licht_gang_boven_11
+          - light.licht_terras_30
+          - light.lichten_gang_39
+          - light.lichten_keuken_29
+          - light.maantje_zolder_13
+        show_header_toggle: true
         state_filter:
-          - on
+          - "on"
         show_empty: false
       - type: entities
         show_header_toggle: false
@@ -52,7 +54,8 @@ views:
         entity: camera.ipcam_mathijs
       - camera_view: live
         type: picture-entity
-        entity: camera.ipcam_oprit_2
+        entity: camera.ipcam_oprit_2        
+        
 
   - title: Beneden
     id: downstairs
