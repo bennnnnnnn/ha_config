@@ -16,3 +16,8 @@
   mjpeg_url: http://motion:8083
   still_image_url: http://motion:8765/picture/3/current/
   name: ipcam_oprit
+
+- platform: mjpeg
+  mjpeg_url: http://motion:8084
+  still_image_url: http://motion:8765/picture/4/current/
+  name: ipcam_tuin

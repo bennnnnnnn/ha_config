@@ -54,7 +54,10 @@ views:
         entity: camera.ipcam_mathijs
       - camera_view: live
         type: picture-entity
-        entity: camera.ipcam_oprit_2        
+        entity: camera.ipcam_oprit_2
+      - camera_view: live
+        type: picture-entity
+        entity: camera.ipcam_tuin  
         
 
   - title: Beneden
@@ -326,6 +329,8 @@ views:
         entity: camera.buienradar
       - type: picture-entity
         entity: camera.ipcam_oprit_2
+      - type: picture-entity
+        entity: camera.ipcam_tuin
         
 
   - title: Cameras
@@ -340,6 +345,10 @@ views:
      - camera_view: live
        type: picture-entity
        entity: camera.ipcam_oprit_2
+     - camera_view: live
+       type: picture-entity
+       entity: camera.ipcam_tuin
+
   - title: LMS Controls
     cards:
       - type: vertical-stack
