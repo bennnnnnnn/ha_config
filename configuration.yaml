@@ -11,7 +11,12 @@ homeassistant:
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: Europe/Brussels
   packages: !include_dir_named packages
-
+  auth_providers:
+    - type: trusted_networks
+      trusted_networks:
+        - 10.9.8.0/24
+    - type: homeassistant
+        
 influxdb:
   host: !secret influxdb_host
   username: !secret influxdb_username
@@ -43,6 +48,7 @@ http:
   ip_ban_enabled: True
   trusted_proxies: !secret trusted_proxies
   login_attempts_threshold: !secret login_attempts
+
 
 # Checks for available updates
 updater:
